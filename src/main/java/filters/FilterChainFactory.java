@@ -1,8 +1,12 @@
 package filters;
 
+import exceptions.InvalidInputException;
+
 public class FilterChainFactory {
 
-    public static FilterChain getFilterChain(FilterType filterType) {
+    public static FilterChain getFilterChain(FilterType filterType) throws InvalidInputException {
+        if(filterType == null)
+            throw new InvalidInputException("Filter type cannot be null");
         switch (filterType) {
             case ALL:
                 return getAllFilterChain();
@@ -10,8 +14,10 @@ public class FilterChainFactory {
                 return new LowerCaseFilter();
             case WHITESPACE_REMOVAL:
                 return new WhiteSpaceRemovalFilter();
-            default:
+            case NONE:
                 return null;
+            default:
+                throw new InvalidInputException("Unknown filter type: " + filterType.toString());
         }
     }
 

@@ -1,5 +1,6 @@
 package processors;
 
+import exceptions.InvalidInputException;
 import mappers.TokenMapper;
 import models.Passage;
 import models.Token;
@@ -12,7 +13,7 @@ public class TokenizedLCSPassageProcessor implements PassageProcessor {
     }
 
     @Override
-    public String getAnswerToQuestion(String question) {
+    public String getAnswerToQuestion(String question) throws InvalidInputException {
         if(question == null || question.isEmpty())
             return null;
         String filteredQuestion = passage.getFilterChain().filter(question);
