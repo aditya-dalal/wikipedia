@@ -1,4 +1,4 @@
-package core;
+package mappers;
 
 import data.Tokens;
 import models.Token;

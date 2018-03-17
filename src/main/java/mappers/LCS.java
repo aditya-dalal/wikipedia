@@ -1,10 +1,7 @@
-package core;
+package mappers;
 
 import models.Token;
 
-/**
- * Created by aditya.dalal on 17/03/18.
- */
 public class LCS {
 
     public int getLCSLength(Token token, String input) {

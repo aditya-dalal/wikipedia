@@ -1,11 +1,9 @@
-package core;
+package tokenizers;
 
 import data.Tokens;
+import filters.FilterChain;
 import models.Token;
 
-/**
- * Created by aditya.dalal on 17/03/18.
- */
 public class AnswerTokenizer implements Tokenizer {
 
     private FilterChain filterChain;

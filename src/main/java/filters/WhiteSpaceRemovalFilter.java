@@ -1,5 +1,8 @@
-package core;
+package filters;
 
+import lombok.Setter;
+
+@Setter
 public class WhiteSpaceRemovalFilter implements FilterChain {
 
     private FilterChain filterChain;
@@ -8,10 +11,5 @@ public class WhiteSpaceRemovalFilter implements FilterChain {
     public String filter(String str) {
         String filteredString = str.replaceAll("\\s", "");
         return filterChain == null ? filteredString : filterChain.filter(filteredString);
-    }
-
-    @Override
-    public void setFilterChain(FilterChain filterChain) {
-        this.filterChain = filterChain;
     }
 }

@@ -1,6 +1,7 @@
-import core.*;
-import data.Tokens;
-import models.Passage;
+import filters.FilterType;
+import processors.PassageProcessor;
+import processors.PassageProcessorFactory;
+import processors.ProcessorType;
 
 import java.util.Arrays;
 import java.util.List;
@@ -34,35 +35,11 @@ public class Client {
                 "Which are the three species of zebras?",
                 "Which subgenus do the plains zebra and the mountain zebra belong to?");
 
-        PassageProcessor zebraPassageProcessor = getPassageProcessor(passage, answers);
-
+        PassageProcessor zebraPassageProcessor = PassageProcessorFactory.getPassageProcessor(ProcessorType.TOKENIZED_LCS_PROCESSOR,
+                FilterType.ALL, passage, answers);
         for (String question: questions)
             System.out.println(zebraPassageProcessor.getAnswerToQuestion(question));
     }
 
-    private static PassageProcessor getPassageProcessor(String passage, String answers) {
-        FilterChain filterChain = getFilterChain();
-        Tokens zebraPassageTokens = getSentenceTokens(passage, filterChain);
-        Tokens zebraAnswerTokens = getAnswerTokens(answers, filterChain);
-        TokenMapper mapper = new LCSTokenMapper(new LCS());
-        Passage zebraPassage = new Passage(zebraPassageTokens, zebraAnswerTokens, filterChain, mapper);
-        return new TokenizedLCSPassageProcessor(zebraPassage);
-    }
 
-    private static Tokens getAnswerTokens(String answers, FilterChain filterChain) {
-        Tokenizer tokenizer = new AnswerTokenizer(filterChain);
-        return tokenizer.generateTokens(answers);
-    }
-
-    private static Tokens getSentenceTokens(String passage, FilterChain filterChain) {
-        Tokenizer tokenizer = new PassageTokenizer(filterChain);
-        return tokenizer.generateTokens(passage);
-    }
-
-    private static FilterChain getFilterChain() {
-        FilterChain lowerCaseFilter = new LowerCaseFilter();
-        FilterChain whiteSpaceRemovalFilter = new WhiteSpaceRemovalFilter();
-        lowerCaseFilter.setFilterChain(whiteSpaceRemovalFilter);
-        return lowerCaseFilter;
-    }
 }

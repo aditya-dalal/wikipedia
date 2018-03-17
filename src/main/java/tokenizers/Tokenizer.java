@@ -1,4 +1,4 @@
-package core;
+package tokenizers;
 
 import data.Tokens;
 

@@ -1,6 +1,7 @@
-package core;
+package tokenizers;
 
 import data.Tokens;
+import filters.FilterChain;
 import models.Token;
 
 public class PassageTokenizer implements Tokenizer {

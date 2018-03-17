@@ -1,5 +1,6 @@
-package core;
+package processors;
 
+import mappers.TokenMapper;
 import models.Passage;
 import models.Token;
 

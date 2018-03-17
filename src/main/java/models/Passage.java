@@ -1,9 +1,11 @@
 package models;
 
-import core.FilterChain;
-import core.TokenMapper;
 import data.Tokens;
+import filters.FilterChain;
+import lombok.Getter;
+import mappers.TokenMapper;
 
+@Getter
 public class Passage {
 
     private Tokens passageTokens;
@@ -16,21 +18,5 @@ public class Passage {
         this.filterChain = filterChain;
         this.mapper = mapper;
         this.answerTokens = answerTokens;
-    }
-
-    public TokenMapper getMapper() {
-        return this.mapper;
-    }
-
-    public FilterChain getFilterChain() {
-        return this.filterChain;
-    }
-
-    public Tokens getPassageTokens() {
-        return this.passageTokens;
-    }
-
-    public Tokens getAnswerTokens() {
-        return this.answerTokens;
     }
 }
