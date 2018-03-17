@@ -23,26 +23,26 @@ public class PassageProcessorFactory {
                 FilterChain filterChain = FilterChainFactory.getFilterChain(filterType);
                 return getTokenizedLCSPassageProcessor(input, filterChain);
             default:
-                return null;
+                throw new InvalidInputException("Unknown processor type: " + processorType.toString());
         }
     }
 
     private static PassageProcessor getTokenizedLCSPassageProcessor(RawInput input, FilterChain filterChain) throws InvalidInputException {
-        Tokens passageTokens = getPassageTokens(input.getPassage(), filterChain);
-        Tokens answerTokens = getAnswerTokens(input.getAnswers(), filterChain);
+        Tokens passageTokens = getPassageTokens(input, filterChain);
+        Tokens answerTokens = getAnswerTokens(input, filterChain);
         TokenMapper mapper = new LCSTokenMapper(new LCS());
         Passage passage = new Passage(passageTokens, answerTokens, filterChain, mapper);
         return new TokenizedLCSPassageProcessor(passage);
     }
 
-    private static Tokens getAnswerTokens(String answers, FilterChain filterChain) throws InvalidInputException {
+    private static Tokens getAnswerTokens(RawInput input, FilterChain filterChain) throws InvalidInputException {
         Tokenizer tokenizer = new AnswerTokenizer(filterChain);
-        return tokenizer.generateTokens(answers);
+        return tokenizer.generateTokens(input);
     }
 
-    private static Tokens getPassageTokens(String passage, FilterChain filterChain) throws InvalidInputException {
+    private static Tokens getPassageTokens(RawInput input, FilterChain filterChain) throws InvalidInputException {
         Tokenizer tokenizer = new PassageTokenizer(filterChain);
-        return tokenizer.generateTokens(passage);
+        return tokenizer.generateTokens(input);
     }
 
 

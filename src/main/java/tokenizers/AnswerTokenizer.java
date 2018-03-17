@@ -3,6 +3,7 @@ package tokenizers;
 import data.Tokens;
 import exceptions.InvalidInputException;
 import filters.FilterChain;
+import models.RawInput;
 import models.Token;
 
 public class AnswerTokenizer implements Tokenizer {
@@ -15,9 +16,11 @@ public class AnswerTokenizer implements Tokenizer {
     }
 
     @Override
-    public Tokens generateTokens(String input) throws InvalidInputException {
+    public Tokens generateTokens(RawInput input) throws InvalidInputException {
+        if(input == null || input.getAnswers() == null)
+            throw new InvalidInputException("No input data to tokenize");
         Tokens tokens = new Tokens();
-        for(String answer: input.split(DELIMITER)) {
+        for(String answer: input.getAnswers().split(DELIMITER)) {
             Token token = new Token(filterChain.filter(answer), answer.trim());
             tokens.addToken(token);
         }

@@ -2,7 +2,8 @@ package tokenizers;
 
 import data.Tokens;
 import exceptions.InvalidInputException;
+import models.RawInput;
 
 public interface Tokenizer {
-    Tokens generateTokens(String input) throws InvalidInputException;
+    Tokens generateTokens(RawInput input) throws InvalidInputException;
 }

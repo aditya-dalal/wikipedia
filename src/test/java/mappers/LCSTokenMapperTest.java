@@ -73,7 +73,7 @@ public class LCSTokenMapperTest {
 
     @Test
     public void testGetMatchingTokenWhenAccuracyIsLess() throws InvalidInputException {
-        Tokens tokens = TestData.geTokensWithSameLengthButLessAccuracy();
+        Tokens tokens = TestData.getTokensWithSameLengthButLessAccuracy();
         when(lcs.getLCSLength("grévy'szebraandthemountainzebra", "grévy'szebraandthemountainzebraareendangered")).thenReturn(31);
         when(lcs.getLCSLength("grévy'szebraandthemountainzebraare", "grévy'szebraandthemountainzebraareendangered")).thenReturn(31);
         Token token = mapper.getMatchingToken(tokens, "grévy'szebraandthemountainzebraareendangered");
