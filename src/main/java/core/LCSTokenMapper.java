@@ -14,11 +14,14 @@ public class LCSTokenMapper implements TokenMapper {
     @Override
     public Token getMatchingToken(Tokens tokens, String input) {
         Token result = null;
-        int lcsLength = 0;
+        double accuracy = 0.0;
+        int len = 0;
         for(Token token: tokens) {
-            int len = lcs.getLCSLength(token, input);
-            if (lcsLength < len) {
-                lcsLength = len;
+            int currentLen = lcs.getLCSLength(token, input);
+            double currentAccuracy = currentLen / (double) token.getToken().length();
+            if(len <= currentLen && accuracy < currentAccuracy) {
+                len = currentLen;
+                accuracy = currentAccuracy;
                 result = token;
             }
         }

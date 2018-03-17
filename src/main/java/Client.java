@@ -2,6 +2,9 @@ import core.*;
 import data.Tokens;
 import models.Passage;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Client {
 
     public static void main(String[] args) {
@@ -24,11 +27,17 @@ public class Client {
         String answers = "subgenus Hippotigris; the plains zebra, the Grévy's zebra and the mountain zebra;horses and " +
                 "donkeys;aims to breed zebras that are phenotypically similar to the quagga; Grévy's zebra and the " +
                 "mountain zebra";
-        String question = "Which Zebras are endangered?";
+        List<String> questions = Arrays.asList(
+                "Which Zebras are endangered?",
+                "What is the aim of the Quagga Project?",
+                "Which animals are some of their closest relatives?",
+                "Which are the three species of zebras?",
+                "Which subgenus do the plains zebra and the mountain zebra belong to?");
 
         PassageProcessor zebraPassageProcessor = getPassageProcessor(passage, answers);
 
-        System.out.println(zebraPassageProcessor.getAnswerToQuestion(question));
+        for (String question: questions)
+            System.out.println(zebraPassageProcessor.getAnswerToQuestion(question));
     }
 
     private static PassageProcessor getPassageProcessor(String passage, String answers) {

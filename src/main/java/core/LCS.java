@@ -13,11 +13,11 @@ public class LCS {
             return len;
 
         int lenSentence = token.getToken().length();
-        int lenQuestion = input.length();
-        int[][] longestSuffixMatrix = new int[lenSentence][lenQuestion];
+        int lenInput = input.length();
+        int[][] longestSuffixMatrix = new int[lenSentence][lenInput];
 
         for(int i = 0; i < lenSentence; i++) {
-            for (int j = 0; j < lenQuestion; j++) {
+            for (int j = 0; j < lenInput; j++) {
                 if(token.getToken().charAt(i) == input.charAt(j)) {
                     if(i == 0 || j == 0)
                         longestSuffixMatrix[i][j] = 1;
