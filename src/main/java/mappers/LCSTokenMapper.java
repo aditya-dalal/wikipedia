@@ -17,7 +17,7 @@ public class LCSTokenMapper implements TokenMapper {
         double accuracy = 0.0;
         int len = 0;
         for(Token token: tokens) {
-            int currentLen = lcs.getLCSLength(token, input);
+            int currentLen = lcs.getLCSLength(token.getToken(), input);
             double currentAccuracy = currentLen / (double) token.getToken().length();
             if(len <= currentLen && accuracy < currentAccuracy) {
                 len = currentLen;
