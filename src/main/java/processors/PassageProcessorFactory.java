@@ -9,6 +9,7 @@ import mappers.LCS;
 import mappers.LCSTokenMapper;
 import mappers.TokenMapper;
 import models.Passage;
+import models.RawInput;
 import tokenizers.AnswerTokenizer;
 import tokenizers.PassageTokenizer;
 import tokenizers.Tokenizer;
@@ -16,19 +17,19 @@ import tokenizers.Tokenizer;
 public class PassageProcessorFactory {
 
     public static PassageProcessor getPassageProcessor(ProcessorType processorType, FilterType filterType,
-                                                       String passageString, String answersString) throws InvalidInputException {
+                                                       RawInput input) throws InvalidInputException {
         switch (processorType) {
             case TOKENIZED_LCS_PROCESSOR:
                 FilterChain filterChain = FilterChainFactory.getFilterChain(filterType);
-                return getTokenizedLCSPassageProcessor(passageString, answersString, filterChain);
+                return getTokenizedLCSPassageProcessor(input, filterChain);
             default:
                 return null;
         }
     }
 
-    private static PassageProcessor getTokenizedLCSPassageProcessor(String passageString, String answersString, FilterChain filterChain) throws InvalidInputException {
-        Tokens passageTokens = getPassageTokens(passageString, filterChain);
-        Tokens answerTokens = getAnswerTokens(answersString, filterChain);
+    private static PassageProcessor getTokenizedLCSPassageProcessor(RawInput input, FilterChain filterChain) throws InvalidInputException {
+        Tokens passageTokens = getPassageTokens(input.getPassage(), filterChain);
+        Tokens answerTokens = getAnswerTokens(input.getAnswers(), filterChain);
         TokenMapper mapper = new LCSTokenMapper(new LCS());
         Passage passage = new Passage(passageTokens, answerTokens, filterChain, mapper);
         return new TokenizedLCSPassageProcessor(passage);

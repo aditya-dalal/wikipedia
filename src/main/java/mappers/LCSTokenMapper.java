@@ -1,6 +1,7 @@
 package mappers;
 
 import data.Tokens;
+import exceptions.InvalidInputException;
 import models.Token;
 
 public class LCSTokenMapper implements TokenMapper {
@@ -12,8 +13,10 @@ public class LCSTokenMapper implements TokenMapper {
     }
 
     @Override
-    public Token getMatchingToken(Tokens tokens, String input) {
+    public Token getMatchingToken(Tokens tokens, String input) throws InvalidInputException {
         Token result = null;
+        if(tokens == null || input == null || input.isEmpty())
+            throw new InvalidInputException("Token and input cannot be null or empty");
         double accuracy = 0.0;
         int len = 0;
         for(Token token: tokens) {
