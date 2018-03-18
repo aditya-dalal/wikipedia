@@ -8,7 +8,6 @@ import org.junit.experimental.categories.Category;
 import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 
 @Category(UnitTests.class)
 public class FilterChainFactoryTest {
@@ -39,7 +38,7 @@ public class FilterChainFactoryTest {
     @Test
     public void testFactoryForNoneFilter() throws InvalidInputException {
         filterChain = FilterChainFactory.getFilterChain(FilterType.NONE);
-        assertNull(filterChain);
+        assertEquals("\nAbC Def\t", filterChain.filter("\nAbC Def\t"));
     }
 
     @Test

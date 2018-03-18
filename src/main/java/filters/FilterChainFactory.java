@@ -15,7 +15,7 @@ public class FilterChainFactory {
             case WHITESPACE_REMOVAL:
                 return new WhiteSpaceRemovalFilter();
             case NONE:
-                return null;
+                return new NoneFilter();
             default:
                 throw new InvalidInputException("Unknown filter type: " + filterType.toString());
         }
