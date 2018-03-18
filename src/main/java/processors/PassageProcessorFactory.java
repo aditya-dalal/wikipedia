@@ -18,6 +18,12 @@ public class PassageProcessorFactory {
 
     public static PassageProcessor getPassageProcessor(ProcessorType processorType, FilterType filterType,
                                                        RawInput input) throws InvalidInputException {
+        if(processorType == null)
+            throw new InvalidInputException("Processor type cannot be null");
+        if(filterType == null)
+            throw new InvalidInputException("Filter type cannot be null");
+        if(input == null)
+            throw new InvalidInputException("Input cannot be null");
         switch (processorType) {
             case TOKENIZED_LCS_PROCESSOR:
                 FilterChain filterChain = FilterChainFactory.getFilterChain(filterType);
@@ -44,6 +50,5 @@ public class PassageProcessorFactory {
         Tokenizer tokenizer = new PassageTokenizer(filterChain);
         return tokenizer.generateTokens(input);
     }
-
 
 }

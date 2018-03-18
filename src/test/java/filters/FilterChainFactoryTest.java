@@ -7,44 +7,43 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.rules.ExpectedException;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 @Category(UnitTests.class)
 public class FilterChainFactoryTest {
-
-    private FilterChain filterChain;
 
     @Rule
     public final ExpectedException expectedException = ExpectedException.none();
 
     @Test
     public void testFactoryForAllFilters() throws InvalidInputException {
-        filterChain = FilterChainFactory.getFilterChain(FilterType.ALL);
-        assertEquals("abcdef", filterChain.filter("\tAbC Def \n"));
+        FilterChain filterChain = FilterChainFactory.getFilterChain(FilterType.ALL);
+        assertNotNull(filterChain);
     }
 
     @Test
     public void testFactoryForLowerCaseFilter() throws InvalidInputException {
-        filterChain = FilterChainFactory.getFilterChain(FilterType.LOWERCASE);
-        assertEquals("abc def", filterChain.filter("AbC Def"));
+        FilterChain filterChain = FilterChainFactory.getFilterChain(FilterType.LOWERCASE);
+        assertTrue(filterChain instanceof LowerCaseFilter);
     }
 
     @Test
     public void testFactoryForWhiteSpaceRemovalFilter() throws InvalidInputException {
-        filterChain = FilterChainFactory.getFilterChain(FilterType.WHITESPACE_REMOVAL);
-        assertEquals("AbCDef", filterChain.filter("\nAbC Def\t"));
+        FilterChain filterChain = FilterChainFactory.getFilterChain(FilterType.WHITESPACE_REMOVAL);
+        assertTrue(filterChain instanceof WhiteSpaceRemovalFilter);
     }
 
     @Test
     public void testFactoryForNoneFilter() throws InvalidInputException {
-        filterChain = FilterChainFactory.getFilterChain(FilterType.NONE);
-        assertEquals("\nAbC Def\t", filterChain.filter("\nAbC Def\t"));
+        FilterChain filterChain = FilterChainFactory.getFilterChain(FilterType.NONE);
+        assertTrue(filterChain instanceof NoneFilter);
     }
 
     @Test
     public void testFactoryForNullFilter() throws InvalidInputException {
         expectedException.expect(InvalidInputException.class);
         expectedException.expectMessage("Filter type cannot be null");
-        filterChain = FilterChainFactory.getFilterChain(null);
+        FilterChainFactory.getFilterChain(null);
     }
 }

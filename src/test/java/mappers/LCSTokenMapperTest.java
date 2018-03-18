@@ -11,10 +11,11 @@ import org.junit.experimental.categories.Category;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import testData.TestData;
+
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
-import testData.TestData;
 
 @Category(UnitTests.class)
 public class LCSTokenMapperTest {
@@ -35,7 +36,7 @@ public class LCSTokenMapperTest {
 
     @Test
     public void testGetMatchingTokenForValidInput() throws InvalidInputException {
-        Tokens tokens = TestData.getNewTokens();
+        Tokens tokens = TestData.getTokens();
         when(lcs.getLCSLength(anyString(), anyString())).thenReturn(31);
         Token token = mapper.getMatchingToken(tokens, "grévy'szebraandthemountainzebraareendangered");
         assertEquals("Grévy's zebra and the mountain zebra", token.getValue());
@@ -52,19 +53,19 @@ public class LCSTokenMapperTest {
     public void testGetMatchingTokenWhenInputIsNull() throws InvalidInputException {
         expectedException.expect(InvalidInputException.class);
         expectedException.expectMessage("Token and input cannot be null or empty");
-        mapper.getMatchingToken(TestData.getNewTokens(), null);
+        mapper.getMatchingToken(TestData.getTokens(), null);
     }
 
     @Test
     public void testGetMatchingTokenWhenInputIsEmpty() throws InvalidInputException {
         expectedException.expect(InvalidInputException.class);
         expectedException.expectMessage("Token and input cannot be null or empty");
-        mapper.getMatchingToken(TestData.getNewTokens(), "");
+        mapper.getMatchingToken(TestData.getTokens(), "");
     }
 
     @Test
     public void testGetMatchingTokenWhenLCSLengthIsLess() throws InvalidInputException {
-        Tokens tokens = TestData.getNewTokens();
+        Tokens tokens = TestData.getTokens();
         when(lcs.getLCSLength("theplainszebra,thegrévy'szebraandthemountainzebra", "grévy'szebraandthemountainzebraareendangered")).thenReturn(31);
         when(lcs.getLCSLength("grévy'szebraandthemountainzebra", "grévy'szebraandthemountainzebraareendangered")).thenReturn(30);
         Token token = mapper.getMatchingToken(tokens, "grévy'szebraandthemountainzebraareendangered");

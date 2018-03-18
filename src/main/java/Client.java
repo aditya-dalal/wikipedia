@@ -45,8 +45,6 @@ public class Client {
 
         PassageProcessor passageProcessor = PassageProcessorFactory.getPassageProcessor(ProcessorType.TOKENIZED_LCS_PROCESSOR,
                 FilterType.ALL, input);
-        if (passageProcessor == null)
-            return;
         for (String question: input.getQuestions())
             System.out.println(passageProcessor.getAnswerToQuestion(question));
     }

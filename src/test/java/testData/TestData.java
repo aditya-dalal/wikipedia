@@ -10,7 +10,7 @@ public class TestData {
         return new Token("whichzebrasareendangered?", "Which Zebras are endangered? ");
     }
 
-    public static Tokens getNewTokens() {
+    public static Tokens getTokens() {
         Tokens tokens = new Tokens();
         tokens.addToken(new Token("theplainszebra,thegrévy'szebraandthemountainzebra", "the plains zebra, the Grévy's zebra and the mountain zebra"));
         tokens.addToken(new Token("grévy'szebraandthemountainzebra", "Grévy's zebra and the mountain zebra"));
@@ -46,4 +46,5 @@ public class TestData {
         input.setPassage("Unlike their closest relatives, horses and donkeys, zebras have never been truly domesticated.");
         return input;
     }
+
 }

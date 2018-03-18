@@ -15,7 +15,7 @@ public class TokenizedLCSPassageProcessor implements PassageProcessor {
     @Override
     public String getAnswerToQuestion(String question) throws InvalidInputException {
         if(question == null || question.isEmpty())
-            return null;
+            throw new InvalidInputException("Question cannot be null or empty");
         String filteredQuestion = passage.getFilterChain().filter(question);
         TokenMapper mapper = passage.getMapper();
         Token matchingPassageToken = mapper.getMatchingToken(passage.getPassageTokens(), filteredQuestion);
