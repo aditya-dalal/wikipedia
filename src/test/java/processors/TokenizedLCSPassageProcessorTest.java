@@ -17,6 +17,7 @@ import org.mockito.MockitoAnnotations;
 import testData.TestData;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
@@ -70,5 +71,21 @@ public class TokenizedLCSPassageProcessorTest {
         expectedException.expect(InvalidInputException.class);
         expectedException.expectMessage("Question cannot be null or empty");
         passageProcessor.getAnswerToQuestion("");
+    }
+
+    @Test
+    public void testGetAnswerToQuestionWhenPassageTokenIsNull() throws InvalidInputException {
+        when(filterChain.filter(anyString())).thenReturn("abc");
+        when(mapper.getMatchingToken(passageTokens, "abc")).thenReturn(null);
+        assertNull(passageProcessor.getAnswerToQuestion("abc"));
+    }
+
+    @Test
+    public void testGetAnswerToQuestionWhenAnswerTokenIsNull() throws InvalidInputException {
+        Token token = TestData.getNewToken();
+        when(filterChain.filter(anyString())).thenReturn("abc");
+        when(mapper.getMatchingToken(passageTokens, "abc")).thenReturn(token);
+        when(mapper.getMatchingToken(answersTokens, token.getToken())).thenReturn(null);
+        assertNull(passageProcessor.getAnswerToQuestion("abc"));
     }
 }

@@ -7,9 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@Setter
 public class RawInput {
+    @Setter
     private String passage;
+    @Setter
     private String answers;
     private List<String> questions;
 

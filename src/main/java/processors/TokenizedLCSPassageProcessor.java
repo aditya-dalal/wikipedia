@@ -19,7 +19,11 @@ public class TokenizedLCSPassageProcessor implements PassageProcessor {
         String filteredQuestion = passage.getFilterChain().filter(question);
         TokenMapper mapper = passage.getMapper();
         Token matchingPassageToken = mapper.getMatchingToken(passage.getPassageTokens(), filteredQuestion);
+        if(matchingPassageToken == null)
+            return null;
         Token matchingAnswerToken = mapper.getMatchingToken(passage.getAnswerTokens(), matchingPassageToken.getToken());
+        if(matchingAnswerToken == null)
+            return null;
         return matchingAnswerToken.getValue();
     }
 }
