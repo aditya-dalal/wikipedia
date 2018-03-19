@@ -1,10 +1,10 @@
 package tokenizers;
 
-import data.Tokens;
 import exceptions.InvalidInputException;
 import filters.FilterChain;
 import models.RawInput;
 import models.Token;
+import models.Tokens;
 
 public class PassageTokenizer implements Tokenizer {
 

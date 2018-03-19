@@ -1,6 +1,5 @@
 package models;
 
-import data.Tokens;
 import filters.FilterChain;
 import lombok.Getter;
 import mappers.TokenMapper;

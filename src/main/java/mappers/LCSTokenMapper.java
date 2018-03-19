@@ -1,8 +1,8 @@
 package mappers;
 
-import data.Tokens;
 import exceptions.InvalidInputException;
 import models.Token;
+import models.Tokens;
 
 public class LCSTokenMapper implements TokenMapper {
 

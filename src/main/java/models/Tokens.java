@@ -1,6 +1,4 @@
-package data;
-
-import models.Token;
+package models;
 
 import java.util.ArrayList;
 import java.util.Iterator;

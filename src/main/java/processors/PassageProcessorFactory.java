@@ -1,6 +1,5 @@
 package processors;
 
-import data.Tokens;
 import exceptions.InvalidInputException;
 import filters.FilterChain;
 import filters.FilterChainFactory;
@@ -10,6 +9,7 @@ import mappers.LCSTokenMapper;
 import mappers.TokenMapper;
 import models.Passage;
 import models.RawInput;
+import models.Tokens;
 import tokenizers.AnswerTokenizer;
 import tokenizers.PassageTokenizer;
 import tokenizers.Tokenizer;

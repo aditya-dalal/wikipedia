@@ -1,12 +1,12 @@
 package processors;
 
-import data.Tokens;
 import exceptions.InvalidInputException;
 import filters.FilterChain;
 import groups.UnitTests;
 import mappers.TokenMapper;
 import models.Passage;
 import models.Token;
+import models.Tokens;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

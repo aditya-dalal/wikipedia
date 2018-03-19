@@ -1,11 +1,11 @@
 package tokenizers;
 
-import data.Tokens;
 import exceptions.InvalidInputException;
 import filters.FilterChain;
 import groups.UnitTests;
 import models.RawInput;
 import models.Token;
+import models.Tokens;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

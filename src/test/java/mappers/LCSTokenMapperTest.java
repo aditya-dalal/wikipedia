@@ -1,9 +1,9 @@
 package mappers;
 
-import data.Tokens;
 import exceptions.InvalidInputException;
 import groups.UnitTests;
 import models.Token;
+import models.Tokens;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

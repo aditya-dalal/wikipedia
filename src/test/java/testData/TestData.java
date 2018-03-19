@@ -1,8 +1,8 @@
 package testData;
 
-import data.Tokens;
 import models.RawInput;
 import models.Token;
+import models.Tokens;
 
 public class TestData {
 
